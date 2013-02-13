@@ -14,7 +14,7 @@ class FlyingMenuWidget extends WP_Widget
   function FlyingMenuWidget()
   {
     $widget_ops = array('classname' => 'FlyingMenuWidget', 'description' => 'Displays a jquery enabled menu that flies in from off screen' );
-    $this->WP_Widget('FlyingMenuWidget', 'Flying Menu', $widget_ops);
+    $this->WP_Widget('FlyingMenuWidget', 'Random Post and Thumbnail', $widget_ops);
   }
  
   function form($instance)
