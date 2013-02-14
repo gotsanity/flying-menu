@@ -63,14 +63,14 @@ ul.flying-menu li.menu-item a
 ul.flying-menu li.menu-item h3, ul.flying-menu h3
 {
 	color: #fff;
-	background:#333 url(heading_bg.jpg) repeat-y;
+	background:#444 url(heading_bg.jpg) repeat-y;
 	font-weight: normal;
 }
 
 ul.flying-menu li.menu-item a
 {
 	color: #999;
-	background:#222 url(tab_bg.jpg) repeat-y;
+	background:#333 url(tab_bg.jpg) repeat-y;
 	border: 1px solid #1a1a1a;
 	text-decoration: none;
 }

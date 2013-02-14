@@ -14,7 +14,7 @@ function slide(navigation_id, pad_out, pad_in, time, multiplier)
 	$(list_elements).each(function(i)
 	{
 		// margin left = - ([width of element] + [total vertical padding of element])
-		$(this).css("margin-left","180px");
+		$(this).css("margin-left","-280px").delay(300);
 		// updates timer
 		timer = (timer*multiplier + time);
 		$(this).animate({ marginLeft: "0" }, timer);
