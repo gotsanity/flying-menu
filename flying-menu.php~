@@ -11,12 +11,26 @@ Author URI: http://www.insidiousdesigns.net/
 // ************************
 // Enqueue the stylesheet and jquery plugin
 
-function FlyingMenuInit() {
-	wp_enqueue_style('flying-menu', plugins_url('flying-menu') . '/styles/flying-menu.css', array(), '1.0', 'all');
-	wp_enqueue_script('jquery-1.9.1', plugins_url('flying-menu') . '/js/jquery-1.9.1.min.js', array( 'jquery' ), '1.9.1', true );
+if (function_exists('load_flying_menu_scripts')) {
+    function load_my_scripts() {
+    	if (!is_admin()) {
+//		wp_deregister_script( 'jquery' );
+//		wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js');
+//		wp_enqueue_script('jquery');
+		wp_enqueue_script('flying-menu-script', plugins_url('/js/flying-menu.js', __FILE__ ), array( 'jquery' ), '1.0', true );
+		wp_enqueue_style('flying-menu-style', plugins_url( 'styles/flying-menu.css', __FILE__ ), array(), '1.0' );
+    	}
+    }
 }
+add_action('admin_init', 'load_flying_menu_scripts');
 
-if (!is_admin()) add_action("wp_enqueue_scripts", "FlyingMenuInit", 11);
+
+
+//	wp_enqueue_script('jquery-1.9.1', plugins_url('/js/jquery-1.9.1.min.js', __FILE__ ), array( 'jquery' ), '1.9.1', true );
+//	wp_enqueue_script('flying-menu-script', plugins_url('/js/flying-menu.js', __FILE__ ), array( 'jquery' ), '1.0', true );
+//	wp_enqueue_style('flying-menu-style', plugins_url( 'styles/flying-menu.css', __FILE__ ), array(), '1.0' );
+
+
 
 // **********************
 // Build FlyingMenuWidget Class
@@ -55,12 +69,12 @@ class FlyingMenuWidget extends WP_Widget
     if (!empty($title))
       echo $before_title . $title . $after_title;;
     // WIDGET CODE GOES HERE
-	// wp_nav_menu( array( 'menu' => 'short', 'menu_class' => 'flying-menu', 'container_id' => 'flying-menu-block' ) );
+	wp_nav_menu( array( 'menu' => 'flying-menu', 'menu_class' => 'flying-menu', 'container_class' => 'flying-menu-block' ) );
 
     // Get the nav menu based on $menu_name (same as 'theme_location' or 'menu' arg to wp_nav_menu)
     // This code based on wp_nav_menu's code to get Menu ID from menu slug
-
-    $menu_name = 'Short';
+/*
+    $menu_name = 'short';
 
     if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
 	$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
@@ -80,11 +94,11 @@ class FlyingMenuWidget extends WP_Widget
     }
     // $menu_list now ready to output
 
-	echo $menu_list;
+	echo $menu_list; */
 
     echo $after_widget;
   }
- 
+
 }
 
 add_action( 'widgets_init', create_function('', 'return register_widget("FlyingMenuWidget");') );?>
